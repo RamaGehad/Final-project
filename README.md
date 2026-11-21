@@ -46,7 +46,7 @@ Every lab page uses the same six sections:
 
 ## Project structure
 
-​```
+
 index.html        home page
 lab1.html         Prototype Pollution
 lab2.html         Open Redirect
@@ -56,7 +56,7 @@ js/lab-ui.js      shared code: code viewer, payload buttons, Vulnerable/Fixed sw
 js/lab1.js        logic of lab 1
 js/lab2.js        logic of lab 2
 js/lab3.js        logic of lab 3
-​```
+
 
 ## Run locally
 
