@@ -1,5 +1,5 @@
 /*
- * Lab 3 - Business Logic Flaw: trusting the quantity (CWE-840)
+ * Lab 3 - Business Logic Flaw: trusting the quantity (CWE-1284)
  *
  * checkoutVulnerable / checkoutFixed are the real logic of the lab.
  * The shop, the product and the prices are invented. Nothing is sent anywhere.
@@ -56,6 +56,11 @@ function runLab3(payload, mode) {
   }
 
   lines.push('Order total  : ' + money(res.total));
+
+  if (Number.isNaN(res.total)) {
+    lines.push('', 'The total is not even a number. The shop would store garbage in its books.');
+    return { status: 'bad', title: 'ATTACK WORKED - the order total is garbage', lines };
+  }
 
   if (res.total < 0) {
     lines.push('', 'The total is negative. The shop would owe the customer ' + money(-res.total) + ' for items never bought.');
