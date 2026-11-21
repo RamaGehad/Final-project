@@ -2,8 +2,9 @@
 
 Final project for 42 Amman. An interactive sandbox website with three hands-on security labs. In each lab the visitor reads the vulnerable code, presses a payload to see the attack work, then switches to the fixed version and watches the same payload get blocked.
 
-**Live site:**  https://ramagehad.github.io/Final-project/
-**Repository:** https://github.com/RamaGehad/Final-project.git
+**Live site:** https://ramagehad.github.io/Final-project/
+
+**Repository:** https://github.com/RamaGehad/Final-project
 
 ## Team
 
@@ -46,7 +47,7 @@ Every lab page uses the same six sections:
 
 ## Project structure
 
-
+```
 index.html        home page
 lab1.html         Prototype Pollution
 lab2.html         Open Redirect
@@ -56,7 +57,7 @@ js/lab-ui.js      shared code: code viewer, payload buttons, Vulnerable/Fixed sw
 js/lab1.js        logic of lab 1
 js/lab2.js        logic of lab 2
 js/lab3.js        logic of lab 3
-
+```
 
 ## Run locally
 
