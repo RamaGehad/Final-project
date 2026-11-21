@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 3 - Business Logic Flaw | Ghurir Sandbox</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav><span class="brand">Ghurir Sandbox</span><a href="index.html">Home</a><a href="lab1.html">Lab 1</a><a href="lab2.html">Lab 2</a><a href="lab3.html" class=active>Lab 3</a></nav>
+<main>
+  <h1>Lab 3: Business Logic Flaw</h1>
+  <div class="tags"><span class="tag">OWASP A04:2021 Insecure Design</span><span class="tag">CWE-840</span></div>
+
+  <div class="modebar">
+    <span class="label">You are testing the:</span>
+    <div class="switch" role="group" aria-label="Choose version">
+      <button type="button" class="mode-btn" data-mode="vulnerable" aria-pressed="true">Vulnerable</button>
+      <button type="button" class="mode-btn" data-mode="fixed" aria-pressed="false">Fixed</button>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2><span class="step">1</span>What it is</h2>
+    <p>A shop multiplies the price by whatever quantity it receives and never checks that the number makes sense. A quantity of -5 gives a negative total, so the shop owes the customer money. This is a business logic flaw (OWASP A04:2021 Insecure Design, CWE-840).</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">2</span>The line</h2>
+    <pre class="code" id="code-vuln" aria-label="Vulnerable code"></pre>
+    <p class="why" id="why-vuln"></p>
+  </section>
+
+  <section class="card" id="try-it">
+    <h2><span class="step">3</span>Try it</h2>
+    <p>Press a button. Then flip the switch at the top to <b>Fixed</b> and see the same payload fail.</p>
+    <div id="payloads"></div>
+    <div id="output" class="out empty" aria-live="polite"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">4</span>Why it matters</h2>
+    <p>Attackers can get free goods, or even make the shop pay them, using nothing but a normal request with a strange number. Scanners rarely catch it, because nothing looks broken.</p><p>Real case: CVE-2024-50968 describes a quantity flaw in a small open-source shopping system (itsourcecode Agri-Trading Online Shopping System 1.0). Sending &quot;-0&quot; as the quantity made the total price zero, so items could be checked out for free.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">5</span>The fix</h2>
+    <pre class="code" id="code-fixed" aria-label="Fixed code"></pre>
+    <p class="why fixwhy" id="why-fixed"></p>
+    <button type="button" class="cta" id="run-fixed">Run the same payload on the Fixed version</button>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">6</span>Sources</h2>
+    <ul class="sources"><li><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-50968" target="_blank" rel="noopener noreferrer">NVD: CVE-2024-50968</a></li><li><a href="https://portswigger.net/web-security/logic-flaws" target="_blank" rel="noopener noreferrer">PortSwigger: Business logic vulnerabilities</a></li><li><a href="https://owasp.org/www-community/vulnerabilities/Business_logic_vulnerability" target="_blank" rel="noopener noreferrer">OWASP: Business Logic Vulnerability</a></li><li><a href="https://cwe.mitre.org/data/definitions/840.html" target="_blank" rel="noopener noreferrer">CWE-840: Business Logic Errors</a></li></ul>
+  </section>
+</main>
+<footer>Simulation only. All names, data and domains are invented. Nothing here attacks a real site.</footer>
+<script src="js/lab-ui.js"></script>
+<script src="js/lab3.js"></script>
+</body>
+</html>
