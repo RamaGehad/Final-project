@@ -2,7 +2,7 @@
 
 Final project for 42 Amman. An interactive sandbox website with three hands-on security labs. In each lab the visitor reads the vulnerable code, presses a payload to see the attack work, then switches to the fixed version and watches the same payload get blocked.
 
-**Live site:** _coming soon (will be added once deployed on GitHub Pages)_
+**Live site:** https://github.com/RamaGehad/Final-project.git
 
 ## Team
 
