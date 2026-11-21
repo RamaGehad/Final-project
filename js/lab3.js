@@ -69,22 +69,40 @@ function runLab3(payload, mode) {
   return { status: 'neutral', title: 'Normal order - works as expected', lines };
 }
 
-// The displayed code (with the highlighted line) is written directly in lab3.html.
+// The code shown on the page lives below, as arrays of lines, and lab-ui.js draws it
+// (same viewer and same highlight style as Labs 1 and 2).
 // Keep it identical to checkoutVulnerable / checkoutFixed above.
 if (typeof document !== 'undefined') {
-  // lab-ui.js redraws the code boxes, so we save what is in the HTML and put it back.
-  const codeBoxes = [document.getElementById('code-vuln'), document.getElementById('code-fixed')];
-  const savedCode = codeBoxes.map((box) => box.innerHTML);
-
   LabUI.init({
     vulnerable: {
-      code: [],
-      hot: -1,
+      code: [
+        '// Server code for POST /api/checkout',
+        'const PRICE = 25;   // dollars per item',
+        '',
+        'function checkout(quantity) {',
+        '  // quantity comes straight from the request body',
+        '  const total = PRICE * quantity;',
+        '',
+        "  return { status: 'accepted', total };",
+        '}',
+      ],
+      hot: 5,
       why: 'The server multiplies by whatever number it receives. It never asks "does this quantity make sense?", so -5 or 0 is treated like a normal order.',
     },
     fixed: {
-      code: [],
-      hot: -1,
+      code: [
+        '// Server code for POST /api/checkout',
+        'const PRICE = 25;   // dollars per item',
+        '',
+        'function checkout(quantity) {',
+        '  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) {',
+        "    return { status: 'rejected' };",
+        '  }',
+        '  const total = PRICE * quantity;',
+        "  return { status: 'accepted', total };",
+        '}',
+      ],
+      hot: 4,
       why: 'The server checks the number first: it must be a whole number from 1 to 10. Anything else is refused before any price is calculated. The check must run on the server, because the browser form can be bypassed.',
     },
     payloads: [
@@ -94,8 +112,6 @@ if (typeof document !== 'undefined') {
     ],
     run: runLab3,
   });
-
-  codeBoxes.forEach((box, i) => { box.innerHTML = savedCode[i]; });
 }
 
 if (typeof module !== 'undefined') module.exports = { runLab3, checkoutVulnerable, checkoutFixed };
